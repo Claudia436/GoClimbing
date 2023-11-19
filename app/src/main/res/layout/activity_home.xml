@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="71dp"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/menu"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="20dp"
+                android:background="@android:drawable/ic_menu_sort_by_size"/>
+
+
+            <TextView
+                android:layout_width="236dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:text="GoClimbing"
+                android:textColor="#00B050"
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:layout_width="113dp"
+                android:layout_height="71dp"
+                android:layout_marginRight="10dp"
+                app:srcCompat="@drawable/logo"/>
+
+        </LinearLayout>
+
+        <SearchView
+            android:id="@+id/busqueda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:background="#C9CBF6"/>
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_height="278dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="255dp"
+                android:layout_height="wrap_content"
+                android:text="Rocódromos"
+                android:textColor="@color/black"
+                android:textSize="17dp"/>
+
+            <Button
+                android:id="@+id/all"
+                android:layout_width="65dp"
+                android:layout_height="38dp"
+                android:text="All"
+                android:backgroundTint="#00B050"/>
+
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="341dp"
+                    android:layout_height="163dp"/>
+
+                <ImageView
+                    android:layout_width="335dp"
+                    android:layout_height="163dp"/>
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <!--mapa-->
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

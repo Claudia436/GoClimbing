@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "770786600175",
+    "project_id": "goclimbing-31422",
+    "storage_bucket": "goclimbing-31422.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770786600175:android:cd1cf2128819383f15271a",
+        "android_client_info": {
+          "package_name": "com.example.goclimbing"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_QzxrX-KMJRUeNLLl2xcygZXbiP2cZ7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
