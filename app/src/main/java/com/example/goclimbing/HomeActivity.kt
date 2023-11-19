@@ -43,15 +43,6 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     private fun createMarker() {
-        val coordinates = LatLng(40.414487234595434, -3.738633241844325)
-        val marker = MarkerOptions().position(coordinates).title("Madrid")
-        map.addMarker(marker)
-        map.animateCamera(
-            CameraUpdateFactory.newLatLngZoom(coordinates,10f),
-            4000,
-            null
-        )
-
         val coords1 = LatLng(40.32013843149239, -3.7481422711146606)
         val marker1 = MarkerOptions().position(coords1).title("Soul Climb Leganés")
         map.addMarker(marker1)
@@ -123,6 +114,11 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
         val coords18 = LatLng(40.40178658936863, -3.6975197711146617)
         val marker18 = MarkerOptions().position(coords18).title("Urban Monkey Madrid")
         map.addMarker(marker18)
+        map.animateCamera(
+            CameraUpdateFactory.newLatLngZoom(coords18,10f),
+            4000,
+            null
+        )
 
         val coords19 = LatLng(40.62846932555582, -4.01728884228933)
         val marker19 = MarkerOptions().position(coords19).title("Urban Monkey Villalba")
