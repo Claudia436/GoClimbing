@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 class RocodromoAdapter : ListAdapter<Rocodromo, RocodromoAdapter.RocodromoViewHolder>(RocodromoDiffCallback()) {
+    var onItemClick: ((Rocodromo) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocodromoViewHolder {
         val view = LayoutInflater
             .from(parent.context)
@@ -19,6 +21,7 @@ class RocodromoAdapter : ListAdapter<Rocodromo, RocodromoAdapter.RocodromoViewHo
     override fun onBindViewHolder(holder: RocodromoViewHolder, position: Int) {
         val rocodromo = getItem(position)
         holder.bind(rocodromo)
+
     }
 
     class RocodromoViewHolder(view: View) : RecyclerView.ViewHolder(view) {

@@ -1,8 +1,12 @@
 package com.example.goclimbing
 
+import android.app.SearchManager
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.SearchView
+import android.widget.SearchView.OnQueryTextListener
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.ktx.Firebase
@@ -11,6 +15,11 @@ import com.google.firebase.firestore.toObject
 
 class ListActivity : AppCompatActivity() {
     lateinit var lista: RecyclerView
+    lateinit var busqueda: SearchView
+
+    var rocodromos = ArrayList<Rocodromo>()
+    var rocodromosFiltrados = ArrayList<Rocodromo>()
+
     val adapter = RocodromoAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +27,49 @@ class ListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_list)
 
         setUpList()
+        cargarBaseDeDatos()
+        manejarBusqueda()
+    }
 
+    private fun manejarBusqueda() {
+        busqueda = findViewById(R.id.busqueda)
+        busqueda.setOnQueryTextListener(object: OnQueryTextListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                filtrar(p0)
+                return true
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                return true
+            }
+        })
+
+        busqueda.setOnCloseListener(object : SearchView.OnCloseListener {
+            override fun onClose(): Boolean {
+                rocodromosFiltrados = rocodromos
+                adapter.submitList(rocodromosFiltrados)
+                return true
+            }
+        })
+    }
+
+    private fun filtrar(query: String?) {
+        if (query.isNullOrEmpty()) {
+            rocodromosFiltrados = rocodromos
+            adapter.submitList(rocodromosFiltrados)
+        } else {
+            // Filtrar en repositorio y plasmar resultados en lista
+
+            val resultadoQuery = rocodromos.filter { rocodromo ->
+                rocodromo.Nombre?.lowercase()?.contains(query.lowercase()) ?: false
+            }
+
+            rocodromosFiltrados = ArrayList(resultadoQuery)
+            adapter.submitList(rocodromosFiltrados)
+        }
+    }
+
+    private fun cargarBaseDeDatos() {
         //database = Firebase.database
         val database = Firebase.firestore
 
@@ -26,7 +77,8 @@ class ListActivity : AppCompatActivity() {
         docRef.get()
             .addOnSuccessListener { documents ->
                 if (documents != null) {
-                    var rocodromos = ArrayList<Rocodromo>()
+                    rocodromos.clear()
+                    rocodromosFiltrados.clear()
 
                     for (document in documents) {
                         val rocodromo = document.toObject<Rocodromo>()
@@ -34,7 +86,9 @@ class ListActivity : AppCompatActivity() {
                         rocodromos.add(rocodromo)
                     }
 
-                    adapter.submitList(rocodromos)
+                    rocodromosFiltrados = rocodromos
+
+                    adapter.submitList(rocodromosFiltrados)
 
                     Log.d("document", "DocumentSnapshot data: ${documents}")
                     // convertir document en nuestra class Rocodromos
@@ -46,11 +100,11 @@ class ListActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Log.d("", "get failed with ", exception)
             }
-
     }
 
     private fun setUpList() {
         lista = findViewById(R.id.list)
+        lista.set
         lista.adapter = adapter
     }
 }
