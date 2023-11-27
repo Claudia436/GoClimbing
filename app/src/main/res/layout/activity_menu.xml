@@ -43,31 +43,14 @@
             android:src="@drawable/escalador"
             app:tint="#A1B5F1"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:text="Usuario"
-            android:textSize="16dp"/>
-
         <Button
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:layout_marginTop="25dp"
             android:text="Cerrar Sesión"
-            android:textSize="17dp"
-            android:backgroundTint="#00B050"/>
-
-        <Button
-            android:id="@+id/borrar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="25dp"
-            android:text="Borrar Cuenta"
             android:textSize="17dp"
             android:backgroundTint="#00B050"/>
 

@@ -101,8 +101,6 @@
 
         </HorizontalScrollView>
 
-        <!--mapa-->
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

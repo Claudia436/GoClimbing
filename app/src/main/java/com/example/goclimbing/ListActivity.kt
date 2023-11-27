@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.SearchView
 import android.widget.SearchView.OnQueryTextListener
 import androidx.recyclerview.widget.ListAdapter
@@ -20,7 +21,13 @@ class ListActivity : AppCompatActivity() {
     var rocodromos = ArrayList<Rocodromo>()
     var rocodromosFiltrados = ArrayList<Rocodromo>()
 
-    val adapter = RocodromoAdapter()
+    val adapter = RocodromoAdapter(object : RocodromoAdapter.OnItemClickListener {
+        override fun onItemClick(rocodromo: Rocodromo) {
+            val intent = Intent(applicationContext, InfoActivity::class.java) // https://medium.com/susheel-karam/different-ways-to-get-context-in-android-8018d9663292
+            intent.putExtra("rocodromoID", rocodromo.Id)
+            startActivity(intent)
+        }
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +111,6 @@ class ListActivity : AppCompatActivity() {
 
     private fun setUpList() {
         lista = findViewById(R.id.list)
-        lista.set
         lista.adapter = adapter
     }
 }

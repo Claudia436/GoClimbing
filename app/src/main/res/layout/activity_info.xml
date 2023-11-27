@@ -52,6 +52,7 @@
             android:layout_marginRight="25dp"/>
 
         <ImageView
+            android:id="@+id/imagen"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_marginLeft="25dp"
@@ -68,51 +69,38 @@
             android:textColor="@color/black"
             android:textSize="17dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/instalaciones"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="100dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
                 android:text="Instalaciones"/>
 
             <TextView
                 android:id="@+id/horario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
                 android:text="Horario"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/contacto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="100dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
                 android:text="Web/contacto"/>
 
             <TextView
                 android:id="@+id/tarifa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="10dp"
                 android:text="Tarifas"/>
 
-        </LinearLayout>
 
         <TextView
             android:id="@+id/ubicacion"
