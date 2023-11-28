@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -13,7 +14,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private lateinit var map:GoogleMap
+    private lateinit var map: GoogleMap
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +32,8 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
             val intent = Intent(this,ListActivity::class.java)
             startActivity(intent)
         }
+
+        cargarFotos()
     }
 
     private fun createFragment() {
@@ -40,6 +44,19 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         createMarker()
+    }
+
+    private fun cargarFotos() {
+        viewPager = findViewById(R.id.viewPager)
+        val photoList = listOf(
+            R.drawable.roco10_1,
+            R.drawable.roco11_1,
+            R.drawable.roco12_1
+            // Agrega más recursos de imágenes según sea necesario
+        )
+
+        val adapter = FotoAdapter(photoList)
+        viewPager.adapter = adapter
     }
 
     private fun createMarker() {

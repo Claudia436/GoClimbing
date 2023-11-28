@@ -1,14 +1,13 @@
 package com.example.goclimbing
 
-import android.app.SearchManager
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.SearchView
 import android.widget.SearchView.OnQueryTextListener
-import androidx.recyclerview.widget.ListAdapter
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.firestore.ktx.firestore
@@ -21,9 +20,11 @@ class ListActivity : AppCompatActivity() {
     var rocodromos = ArrayList<Rocodromo>()
     var rocodromosFiltrados = ArrayList<Rocodromo>()
 
+    // adapter para cargar la lista de rocodromos
     val adapter = RocodromoAdapter(object : RocodromoAdapter.OnItemClickListener {
         override fun onItemClick(rocodromo: Rocodromo) {
             val intent = Intent(applicationContext, InfoActivity::class.java) // https://medium.com/susheel-karam/different-ways-to-get-context-in-android-8018d9663292
+            // pasamos el id del rocodromo, para luego cargarlo en la vista detalle (InfoActivity)
             intent.putExtra("rocodromoID", rocodromo.Id)
             startActivity(intent)
         }
@@ -33,20 +34,52 @@ class ListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
 
-        setUpList()
+        configuracionListaDeRocodromos() //conexion adapter con la lista
         cargarBaseDeDatos()
         manejarBusqueda()
+    }
+
+    private fun configuracionListaDeRocodromos() {
+        lista = findViewById(R.id.list)
+        lista.adapter = adapter
+    }
+
+    private fun cargarBaseDeDatos() {
+        //database = Firebase.database
+        val database = Firebase.firestore
+
+        val docRef = database.collection("Rocodromos") // nombre de la coleccion que tenemos en Firestore
+        docRef.get().addOnSuccessListener { documents ->
+                if (documents != null) {
+                    rocodromos.clear()
+                    rocodromosFiltrados.clear()
+
+                    for (document in documents) {
+                        val rocodromo = document.toObject<Rocodromo>()
+                        rocodromos.add(rocodromo)
+                    }
+
+                    rocodromosFiltrados = rocodromos
+
+                    adapter.submitList(rocodromosFiltrados)
+                } else {
+                    Toast.makeText(applicationContext, "no hay elementos bd!", LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Toast.makeText(applicationContext, "la DB ha fallado!", LENGTH_SHORT).show()
+            }
     }
 
     private fun manejarBusqueda() {
         busqueda = findViewById(R.id.busqueda)
         busqueda.setOnQueryTextListener(object: OnQueryTextListener {
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                filtrar(p0)
+            override fun onQueryTextSubmit(busqueda: String?): Boolean {
+                filtrar(busqueda)
                 return true
             }
 
-            override fun onQueryTextChange(p0: String?): Boolean {
+            override fun onQueryTextChange(busqueda: String?): Boolean {
                 return true
             }
         })
@@ -68,50 +101,13 @@ class ListActivity : AppCompatActivity() {
             // Filtrar en repositorio y plasmar resultados en lista
 
             val resultadoQuery = rocodromos.filter { rocodromo ->
+                // lowercase para que ignore las mayusculas o minusculas
                 rocodromo.Nombre?.lowercase()?.contains(query.lowercase()) ?: false
             }
 
             rocodromosFiltrados = ArrayList(resultadoQuery)
             adapter.submitList(rocodromosFiltrados)
         }
-    }
-
-    private fun cargarBaseDeDatos() {
-        //database = Firebase.database
-        val database = Firebase.firestore
-
-        val docRef = database.collection("Rocodromos")
-        docRef.get()
-            .addOnSuccessListener { documents ->
-                if (documents != null) {
-                    rocodromos.clear()
-                    rocodromosFiltrados.clear()
-
-                    for (document in documents) {
-                        val rocodromo = document.toObject<Rocodromo>()
-                        Log.d("rocodromo", "${rocodromo}")
-                        rocodromos.add(rocodromo)
-                    }
-
-                    rocodromosFiltrados = rocodromos
-
-                    adapter.submitList(rocodromosFiltrados)
-
-                    Log.d("document", "DocumentSnapshot data: ${documents}")
-                    // convertir document en nuestra class Rocodromos
-                    // dicha clase es la que vamos a pasar a nuestra lista
-                } else {
-                    Log.d("document", "No such document")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.d("", "get failed with ", exception)
-            }
-    }
-
-    private fun setUpList() {
-        lista = findViewById(R.id.list)
-        lista.adapter = adapter
     }
 }
 
