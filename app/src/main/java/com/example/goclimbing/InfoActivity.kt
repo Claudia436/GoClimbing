@@ -43,7 +43,6 @@ class InfoActivity : AppCompatActivity() {
     }
 
     private fun cargarBaseDeDatos(rocodromoId: String) {
-        //database = Firebase.database
         val database = Firebase.firestore
 
         val docRef = database.collection("Rocodromos")
@@ -54,15 +53,15 @@ class InfoActivity : AppCompatActivity() {
                         val rocodromo = document.toObject<Rocodromo>()
                         if (rocodromo.Id.equals(rocodromoId)) {
                             cargarRocodromo(rocodromo)
-                            break //si se encuetra un rocodomo se sale/ cierra el for
+                            break //si se encuetra un rocodomo se sale del el for(bucle)
                         }
                     }
                 } else {
-                    Toast.makeText(applicationContext, "no hay elementos bd!", LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "No hay elementos DB", LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(applicationContext, "la DB ha fallado!", LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "La DB ha fallado", LENGTH_SHORT).show()
             }
     }
 

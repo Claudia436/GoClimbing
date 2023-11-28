@@ -45,10 +45,9 @@ class ListActivity : AppCompatActivity() {
     }
 
     private fun cargarBaseDeDatos() {
-        //database = Firebase.database
         val database = Firebase.firestore
 
-        val docRef = database.collection("Rocodromos") // nombre de la coleccion que tenemos en Firestore
+        val docRef = database.collection("Rocodromos") // nombre de la coleccion que tenemos en FireStore
         docRef.get().addOnSuccessListener { documents ->
                 if (documents != null) {
                     rocodromos.clear()
@@ -63,11 +62,11 @@ class ListActivity : AppCompatActivity() {
 
                     adapter.submitList(rocodromosFiltrados)
                 } else {
-                    Toast.makeText(applicationContext, "no hay elementos bd!", LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "No hay elementos DB", LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { exception ->
-                Toast.makeText(applicationContext, "la DB ha fallado!", LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "La DB ha fallado", LENGTH_SHORT).show()
             }
     }
 
@@ -98,7 +97,7 @@ class ListActivity : AppCompatActivity() {
             rocodromosFiltrados = rocodromos
             adapter.submitList(rocodromosFiltrados)
         } else {
-            // Filtrar en repositorio y plasmar resultados en lista
+            // filtrar en repositorio y plasmar resultados en lista
 
             val resultadoQuery = rocodromos.filter { rocodromo ->
                 // lowercase para que ignore las mayusculas o minusculas

@@ -49,10 +49,11 @@ class HomeActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun cargarFotos() {
         viewPager = findViewById(R.id.viewPager)
         val photoList = listOf(
-            R.drawable.roco10_1,
-            R.drawable.roco11_1,
-            R.drawable.roco12_1
-            // Agrega más recursos de imágenes según sea necesario
+            R.drawable.roco17_1,
+            R.drawable.roco26_1,
+            R.drawable.roco7_1,
+            R.drawable.roco16_1,
+            R.drawable.roco19_1
         )
 
         val adapter = FotoAdapter(photoList)
