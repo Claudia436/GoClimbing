@@ -23,7 +23,7 @@ class ListActivity : AppCompatActivity() {
     // adapter para cargar la lista de rocodromos
     val adapter = RocodromoAdapter(object : RocodromoAdapter.OnItemClickListener {
         override fun onItemClick(rocodromo: Rocodromo) {
-            val intent = Intent(applicationContext, InfoActivity::class.java) // https://medium.com/susheel-karam/different-ways-to-get-context-in-android-8018d9663292
+            val intent = Intent(applicationContext, InfoActivity::class.java)
             // pasamos el id del rocodromo, para luego cargarlo en la vista detalle (InfoActivity)
             intent.putExtra("rocodromoID", rocodromo.Id)
             startActivity(intent)

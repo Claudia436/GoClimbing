@@ -40,10 +40,6 @@ class LoginActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         correo = findViewById(R.id.correo)
         contra = findViewById(R.id.contra)
-
-        // TODO borrar luego
-        correo.setText("claudiasafu@gmail.com")
-        contra.setText("123456")
     }
 
     private fun loginUser() {
